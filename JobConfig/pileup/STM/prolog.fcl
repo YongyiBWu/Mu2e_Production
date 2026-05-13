@@ -55,6 +55,14 @@ STMPileup: {
     module_type : RootInput
     fileNames: @nil
   }
+
+  VDResamplerServices : {
+    message : @local::default_message
+    GlobalConstantsService : {
+      inputFile : "Offline/GlobalConstantsService/data/globalConstants_01.txt"
+    }
+  }
+
 }
 
 END_PROLOG
