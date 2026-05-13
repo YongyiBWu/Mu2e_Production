@@ -6,6 +6,7 @@
 #include "Offline/CRVResponse/fcl/prolog.fcl"
 #include "Offline/Filters/fcl/prolog.fcl"
 #include "Offline/Compression/fcl/prolog.fcl"
+#include "Offline/fcl/standardServices.fcl"
 #
 BEGIN_PROLOG
 
@@ -60,6 +61,18 @@ STMPileup: {
     message : @local::default_message
     GlobalConstantsService : {
       inputFile : "Offline/GlobalConstantsService/data/globalConstants_01.txt"
+    }
+  }
+
+  VDResamplerGenSource : {
+    module_type : EmptyEvent
+    maxEvents : @nil
+  }
+
+  VDResamplerGenServices : {
+    @table::Services.Sim
+    TimeTracker: {
+      printSummary: true  # default
     }
   }
 

@@ -8,9 +8,9 @@
 
 process_name: VDResamplerGenerateMix
 
-source : @local::STMPileup.VDResamplerSource
+source : @local::STMPileup.VDResamplerGenSource
 
-services : @local::STMPileup.VDResamplerServices
+services : @local::STMPileup.VDResamplerGenServices
 
 physics: {
   producers : {
@@ -27,12 +27,23 @@ physics: {
       # VDr : 2000.0 # radius of VD116. Only change when another VD is used
       doROOTDump: true
     }
+    genCounter: {
+      module_type: GenEventCounter
+    }
   }
-  o1: [VDResamplerGenerator]
-  end_paths: [o1]
+  analyzers : {
+    genCountLogger: {
+      module_type: GenEventCountReader
+    }
+  }
+  genSample : [VDResamplerGenerator, genCounter]
+  ana : [genCountLogger]
+  trigger_paths : [genSample]
+  end_paths: [ana]
 }
+
+services.SeedService.baseSeed : 8
 
 # if allows ROOTDump, specify output file name
 services.TFileService.fileName : @nil 
 
-services.SeedService.baseSeed : 8
