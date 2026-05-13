@@ -33,3 +33,5 @@ physics: {
 
 # if allows ROOTDump, specify output file name
 services.TFileService.fileName : @nil 
+
+services.SeedService.baseSeed : 8
